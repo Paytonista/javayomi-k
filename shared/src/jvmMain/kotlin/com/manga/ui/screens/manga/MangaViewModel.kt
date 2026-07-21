@@ -10,8 +10,15 @@ import com.manga.services.library.LibraryScanner
 class MangaViewModel {
     var chapterList by mutableStateOf<List<Chapter>>(emptyList())
         private set
+
+    var mangaName by mutableStateOf("")
+        private set
     private val scanner = LibraryScanner()
     fun loadChapters(manga: Manga) {
         chapterList = manga.chapters
+    }
+    fun loadMangaDetails(manga: Manga) {
+        mangaName = manga.mangaName
+
     }
 }
