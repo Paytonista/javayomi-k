@@ -1,4 +1,4 @@
-package com.manga.ui.screens.library
+package com.manga.ui.screens.manga
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -9,7 +9,7 @@ sealed class ChapterContent {
 data class Chapter (
     val chapterTitle: String,
     val content: ChapterContent,
-    val lastRead: Int = 0,
+    val chapterIndex: Int = 0,
     var isRead: Boolean = false,
     val chapterNumber: Double? = null,
 )

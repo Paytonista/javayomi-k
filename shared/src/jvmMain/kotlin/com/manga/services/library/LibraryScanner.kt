@@ -24,7 +24,8 @@ class LibraryScanner {
                             ChapterContent.PdfFile(pdfFiles.path)
                         } else {
                             val imagePaths = files
-                                .filter { file -> file.name.endsWith(".jpg") }
+                                //Refactor
+                                .filter { file -> file.name.endsWith(".png") || file.name.endsWith(".jpg") || file.name.endsWith(".jpeg") || file.name.endsWith(".webp") }
                                 .map { file -> file.path }
                             ChapterContent.ImageFolder(imagePaths)
                         }

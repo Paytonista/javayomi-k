@@ -10,8 +10,10 @@ import com.manga.models.Screens
 import com.manga.ui.components.navigation.Sidebar
 import com.manga.ui.screens.library.LibraryScreen
 import com.manga.ui.screens.library.LibraryViewModel
-import com.manga.ui.screens.library.MangaScreen
-import com.manga.ui.screens.library.MangaViewModel
+import com.manga.ui.screens.manga.MangaScreen
+import com.manga.ui.screens.manga.MangaViewModel
+import com.manga.ui.screens.reader.ReaderViewModel
+import com.manga.ui.screens.reader.ReaderScreen
 
 
 @Composable
@@ -20,6 +22,7 @@ fun AppNavigation(
     navController: NavHostController,
     libraryView: LibraryViewModel,
     mangaView: MangaViewModel,
+    readerView: ReaderViewModel,
 ) {
 
     Sidebar(navController)
@@ -43,6 +46,19 @@ fun AppNavigation(
                 onChapterClick = { chapter ->
                     navController.navigate(Screens.Reader(mangaName = manga.mangaName, chapterName = chapter.chapterTitle))
                 }
+            )
+        }
+
+        composable<Screens.Reader> { backStackEntry ->
+            val route: Screens.Reader = backStackEntry.toRoute()
+            val manga = libraryView.mangaList.find {it.mangaName == route.mangaName}
+            val chapter = mangaView.chapterList.find {it.chapterTitle == route.chapterName}
+
+            ReaderScreen(
+                manga = manga!!,
+                chapter = chapter!!,
+                viewModel = readerView,
+
             )
         }
     }

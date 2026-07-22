@@ -22,6 +22,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("io.coil-kt.coil3:coil-compose:3.5.0")
             implementation("io.coil-kt.coil3:coil-network-okhttp:3.5.0")
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.4")
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
+
 
         }
         commonTest.dependencies {
