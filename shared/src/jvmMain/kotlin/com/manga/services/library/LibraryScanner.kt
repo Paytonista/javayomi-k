@@ -1,11 +1,17 @@
 package com.manga.services.library
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.manga.models.Chapter
 import com.manga.models.ChapterContent
 import com.manga.models.Manga
 import java.io.File
 
 class LibraryScanner {
+
+    var folderPath by mutableStateOf<String>("")
+        private set
     fun scanFolder (rootPath : String): List<Manga> {
         val mangaList = mutableListOf<Manga>()
         val rootFolder = File(rootPath)
@@ -37,5 +43,9 @@ class LibraryScanner {
             }
         }
         return mangaList
+    }
+
+    fun selectFolder(rootPath : String) {
+
     }
 }
