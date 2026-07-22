@@ -16,6 +16,7 @@ import coil3.compose.AsyncImage
 import com.manga.models.Chapter
 import com.manga.models.Manga
 import com.manga.ui.screens.reader.ReaderViewModel
+import androidx.compose.material3.Button
 
 @Composable
 fun ReaderScreen(
@@ -34,7 +35,12 @@ fun ReaderScreen(
                 contentDescription = null,
                 modifier = Modifier.size(300.dp)
             )
-            Text(text = "LOREM IPSUM LOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUM")
+        }
+        Button(onClick = { viewModel.onNextClicked() }) {
+            Text("Next")
+        }
+        Button(onClick = { viewModel.onPrevClicked() }) {
+            Text("Previous")
         }
     }
 }

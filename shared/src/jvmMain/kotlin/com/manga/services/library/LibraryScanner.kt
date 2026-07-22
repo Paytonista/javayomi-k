@@ -19,7 +19,6 @@ class LibraryScanner {
                     for (chapterFolder in chapterFolders) {
                         val files = chapterFolder.listFiles() ?: emptyArray<File>()
                         val pdfFiles = files.find {file ->file.name.endsWith(".pdf")}
-
                         val content = if (pdfFiles != null) {
                             ChapterContent.PdfFile(pdfFiles.path)
                         } else {

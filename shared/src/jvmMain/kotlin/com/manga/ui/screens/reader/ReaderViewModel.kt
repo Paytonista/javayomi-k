@@ -29,6 +29,9 @@ class ReaderViewModel : ViewModel() {
     var pageCount by mutableStateOf<Int>(0)
     private set
 
+    var currentPage by mutableStateOf(0)
+        private set
+
 
     var mangaName by mutableStateOf("")
         private set
@@ -76,19 +79,24 @@ class ReaderViewModel : ViewModel() {
         }
     }
 
+
+
     fun loadSettings(manga: Manga) {
         mangaName = manga.mangaName
     }
 
     fun onNextClicked() {
-        if(chapterIndex < pageCount) {
-            chapterIndex = chapterIndex + 1
+        if(chapterIndex < pageCount - 1) {
+            chapterIndex +=  1
+            println(chapterIndex)
+
         }
     }
 
     fun onPrevClicked() {
-        if(chapterIndex < pageCount) {
-            chapterIndex++
+        if(chapterIndex > 0) {
+            chapterIndex -= 1
+            println(chapterIndex)
         }
     }
 }
