@@ -8,14 +8,14 @@ import com.manga.models.ChapterContent
 import com.manga.models.Manga
 import java.io.File
 
-class LibraryScanner {
+class LibraryServices {
 
     var folderPath by mutableStateOf<String>("")
         private set
+
     fun scanFolder (rootPath : String): List<Manga> {
         val mangaList = mutableListOf<Manga>()
         val rootFolder = File(rootPath)
-
         val mangaFolders = rootFolder.listFiles() { file -> file.isDirectory }
         if (mangaFolders != null) {
             for(mangaFolder in mangaFolders) {

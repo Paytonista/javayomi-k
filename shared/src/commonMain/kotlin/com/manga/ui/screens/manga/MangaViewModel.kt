@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.manga.models.Manga
 import com.manga.models.Chapter
-import com.manga.services.library.LibraryScanner
+import com.manga.services.library.LibraryServices
 
 class MangaViewModel {
     var chapterList by mutableStateOf<List<Chapter>>(emptyList())
@@ -13,7 +13,6 @@ class MangaViewModel {
 
     var mangaName by mutableStateOf("")
         private set
-    private val scanner = LibraryScanner()
     fun loadChapters(manga: Manga) {
         chapterList = manga.chapters
     }

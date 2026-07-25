@@ -58,7 +58,6 @@ fun AppNavigation(
                 manga = manga!!,
                 chapter = chapter!!,
                 viewModel = readerView,
-
             )
         }
     }

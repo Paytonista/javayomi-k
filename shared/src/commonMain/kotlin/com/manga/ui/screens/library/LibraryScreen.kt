@@ -16,9 +16,6 @@ fun LibraryScreen(
     viewModel: LibraryViewModel,
     onMangaClick: (Manga) -> Unit
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.loadLibrary("C:\\Users\\kenne\\OneDrive\\Desktop\\TestLibrary")
-    }
 
     LazyColumn {
         items(viewModel.mangaList) { manga ->

@@ -22,7 +22,7 @@ import androidx.compose.material3.Button
 fun ReaderScreen(
     manga: Manga,
     chapter: Chapter,
-    viewModel: ReaderViewModel,
+    viewModel: com.manga.ui.screens.reader.ReaderViewModel,
 ) {
     LaunchedEffect(chapter) {
         viewModel.loadChapter(chapter)

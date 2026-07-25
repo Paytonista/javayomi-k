@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import com.manga.models.Chapter
 import com.manga.models.ChapterContent
 import com.manga.models.Manga
-import com.manga.services.library.LibraryScanner
 import java.util.zip.ZipFile
 
 import androidx.lifecycle.ViewModel

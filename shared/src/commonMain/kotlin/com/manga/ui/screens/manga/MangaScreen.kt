@@ -22,7 +22,7 @@ import coil3.compose.AsyncImage
 @Composable
 fun MangaScreen(
     manga: Manga,
-    viewModel: MangaViewModel,
+    viewModel: com.manga.ui.screens.manga.MangaViewModel,
     onChapterClick: (Chapter) -> Unit
 ) {
     LaunchedEffect(Unit) {

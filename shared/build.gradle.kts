@@ -25,6 +25,10 @@ kotlin {
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.4")
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
+            implementation("io.github.vinceglb:filekit-core:0.14.2")
+            implementation("io.github.vinceglb:filekit-dialogs:0.14.2")
+            implementation("io.github.vinceglb:filekit-dialogs-compose:0.14.2")
+            implementation("io.github.vinceglb:filekit-coil:0.14.2")
 
 
         }
