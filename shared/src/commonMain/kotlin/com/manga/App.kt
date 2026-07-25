@@ -3,7 +3,6 @@ package com.manga
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.navigation.compose.rememberNavController
 import com.manga.ui.screens.library.LibraryViewModel
@@ -15,7 +14,7 @@ import com.manga.repositories.LibraryRepository
 import com.manga.services.filesystem.FolderServices
 import com.manga.services.library.LibraryServices
 import io.github.vinceglb.filekit.FileKit
-import kotlinx.coroutines.launch
+
 
 @Preview
 @Composable
@@ -34,11 +33,6 @@ fun App() {
 
     //repositories
 
-
-    //services
-
-
-    val scope = rememberCoroutineScope()
 
     Row {
         AppNavigation(

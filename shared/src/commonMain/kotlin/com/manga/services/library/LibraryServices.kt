@@ -10,9 +10,6 @@ import java.io.File
 
 class LibraryServices {
 
-    var folderPath by mutableStateOf<String>("")
-        private set
-
     fun scanFolder (rootPath : String): List<Manga> {
         var isValidMangaPath = false
         val mangaList = mutableListOf<Manga>()
