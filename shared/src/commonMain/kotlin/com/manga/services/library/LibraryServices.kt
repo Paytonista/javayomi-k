@@ -14,6 +14,7 @@ class LibraryServices {
         private set
 
     fun scanFolder (rootPath : String): List<Manga> {
+        var isValidMangaPath = false
         val mangaList = mutableListOf<Manga>()
         val rootFolder = File(rootPath)
         val mangaFolders = rootFolder.listFiles() { file -> file.isDirectory }
@@ -23,29 +24,45 @@ class LibraryServices {
                 val chapterFolders = mangaFolder.listFiles { file -> file.isDirectory }
                 if (chapterFolders != null) {
                     for (chapterFolder in chapterFolders) {
+
                         val files = chapterFolder.listFiles() ?: emptyArray<File>()
                         val pdfFiles = files.find {file ->file.name.endsWith(".pdf")}
-                        val content = if (pdfFiles != null) {
-                            ChapterContent.PdfFile(pdfFiles.path)
-                        } else {
-                            val imagePaths = files
-                                //Refactor
-                                .filter { file -> file.name.endsWith(".png") || file.name.endsWith(".jpg") || file.name.endsWith(".jpeg") || file.name.endsWith(".webp") }
-                                .map { file -> file.path }
-                            ChapterContent.ImageFolder(imagePaths)
+                        val cbzFiles = files.find {file -> file.name.endsWith(".cbz")}
+                        val imageFiles = files.filter {file -> file.name.endsWith(".png") || file.name.endsWith(".jpg") || file.name.endsWith(".jpeg") || file.name.endsWith(".webp") }
+
+                        val content: ChapterContent = when {
+                            imageFiles.isNotEmpty() -> {
+                                isValidMangaPath = true
+                                ChapterContent.ImageFolder(imagePaths = imageFiles.map { file -> file.path })
+                            }
+
+                            pdfFiles != null ->
+                                ChapterContent.ImageFolder(null)
+                            cbzFiles  != null ->
+                                ChapterContent.ImageFolder(null)
+                            else ->
+                                ChapterContent.ImageFolder(null)
                         }
-                        val chapter = Chapter(chapterFolder.name, content)
-                        chapters.add(chapter)
+                        if (isValidMangaPath) {
+                            val chapter = Chapter(chapterFolder.name, content)
+                            chapters.add(chapter)
+                        }
+                        }
+
+
                     }
+
+                if (isValidMangaPath) {
+                    val manga = Manga(mangaFolder.name, chapters)
+                    mangaList.add(manga)
                 }
-                val manga = Manga(mangaFolder.name, chapters)
-                mangaList.add(manga)
+
+                }
+
+
             }
-        }
+
         return mangaList
     }
 
-    fun selectFolder(rootPath : String) {
-
-    }
 }

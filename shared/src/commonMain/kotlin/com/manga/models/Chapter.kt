@@ -1,7 +1,7 @@
 package com.manga.models
 
 sealed class ChapterContent {
-    data class ImageFolder(val imagePaths: List<String>) : ChapterContent()
+    data class ImageFolder(val imagePaths: List<String>?) : ChapterContent()
     data class PdfFile(val filePath: String) : ChapterContent()
     data class CbzFile(val filePath: String) : ChapterContent()
 }

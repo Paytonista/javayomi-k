@@ -51,12 +51,12 @@ class ReaderViewModel : ViewModel() {
         chapterIndex = 0
         when(val content = chapter.content) {
             is ChapterContent.ImageFolder -> {
-                println(chapter)
-                println("Loading image chapter")
-                imageList = content.imagePaths
-                println(imageList)
-                pageCount = content.imagePaths.size
-                println(pageCount)
+                if(content.imagePaths != null) {
+                    imageList = content.imagePaths
+                    println(imageList)
+                    pageCount = content.imagePaths.size
+                    println(pageCount)
+                }
 
             }
             is ChapterContent.PdfFile -> {

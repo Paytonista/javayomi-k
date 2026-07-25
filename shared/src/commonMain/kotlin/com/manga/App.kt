@@ -27,7 +27,7 @@ fun App() {
 
     val libraryRepository = remember { LibraryRepository(FolderServices(), LibraryServices()) }
 
-    //viewmodels
+    //view models
     val libraryViewModel = remember { LibraryViewModel(libraryRepository) }
     val mangaViewModel = remember { MangaViewModel() }
     val readerViewModel = remember { ReaderViewModel() }
@@ -49,9 +49,8 @@ fun App() {
         )
 
         TextButton(onClick = {
-            scope.launch {
-                libraryViewModel.addToLibrary()
-            }
+            libraryViewModel.addToLibrary()
+
         }) {
             Text("Add to Library")
         }

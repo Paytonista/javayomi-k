@@ -13,7 +13,6 @@ class LibraryViewModel (
     private val libraryRepository: LibraryRepository,
 ) : ViewModel() {
 
-
     var mangaList by mutableStateOf<List<Manga>>(emptyList())
         private set
 
