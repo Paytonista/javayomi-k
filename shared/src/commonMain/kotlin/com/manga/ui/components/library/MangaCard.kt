@@ -3,6 +3,7 @@ package com.manga.ui.components.library
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,11 +35,12 @@ fun MangaCard(
                 model = manga.mangaCover,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.size(400.dp)
-                                    .aspectRatio(2f / 3f)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(2f / 3f)
 
             )
-            Text(manga.mangaName)
+
         }
     }
 

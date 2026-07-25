@@ -22,7 +22,6 @@ class LibraryViewModel (
     fun loadLibrary() {
         println("load from database")
     }
-
     fun addToLibrary() {
         viewModelScope.launch {
             isLoading = true
