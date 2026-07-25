@@ -17,12 +17,14 @@ class LibraryServices {
         val mangaFolders = rootFolder.listFiles() { file -> file.isDirectory }
         if (mangaFolders != null) {
             for(mangaFolder in mangaFolders) {
+                val mangaCover = setLocalMangaCover(mangaFolder)
                 val chapters = mutableListOf<Chapter>()
                 val chapterFolders = mangaFolder.listFiles { file -> file.isDirectory }
                 if (chapterFolders != null) {
                     for (chapterFolder in chapterFolders) {
 
                         val files = chapterFolder.listFiles() ?: emptyArray<File>()
+
                         val pdfFiles = files.find {file ->file.name.endsWith(".pdf")}
                         val cbzFiles = files.find {file -> file.name.endsWith(".cbz")}
                         val imageFiles = files.filter {file -> file.name.endsWith(".png") || file.name.endsWith(".jpg") || file.name.endsWith(".jpeg") || file.name.endsWith(".webp") }
@@ -31,7 +33,10 @@ class LibraryServices {
                             imageFiles.isNotEmpty() -> {
                                 isValidMangaPath = true
                                 ChapterContent.ImageFolder(imagePaths = imageFiles.map { file -> file.path })
+
                             }
+
+                            // tobeimplemented
 
                             pdfFiles != null ->
                                 ChapterContent.ImageFolder(null)
@@ -45,21 +50,29 @@ class LibraryServices {
                             chapters.add(chapter)
                         }
                         }
-
-
                     }
 
                 if (isValidMangaPath) {
-                    val manga = Manga(mangaFolder.name, chapters)
+                    println(mangaCover)
+                    val manga = Manga(mangaFolder.name, mangaCover, chapters)
                     mangaList.add(manga)
                 }
 
                 }
-
-
             }
-
         return mangaList
+    }
+
+
+    fun setLocalMangaCover(mangaFolder : File) : String? {
+        val chapterFolders = mangaFolder.listFiles { file -> file.isDirectory }
+        if (chapterFolders != null) {
+            val firstChapter = chapterFolders[0].listFiles()
+            if (firstChapter != null) {
+                return firstChapter[0].path
+            }
+        }
+        return null
     }
 
 }

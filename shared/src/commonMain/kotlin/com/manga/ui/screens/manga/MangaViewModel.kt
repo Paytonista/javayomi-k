@@ -17,7 +17,9 @@ class MangaViewModel {
         chapterList = manga.chapters
     }
     fun loadMangaDetails(manga: Manga) {
+        println("Loading manga details: $manga ")
         mangaName = manga.mangaName
 
     }
+
 }

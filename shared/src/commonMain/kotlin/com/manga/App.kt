@@ -42,13 +42,6 @@ fun App() {
             readerView = readerViewModel
         )
 
-        TextButton(onClick = {
-            libraryViewModel.addToLibrary()
-
-        }) {
-            Text("Add to Library")
-        }
-
 
     }
 }
