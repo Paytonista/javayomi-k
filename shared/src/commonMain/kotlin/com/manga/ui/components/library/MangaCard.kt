@@ -28,7 +28,7 @@ fun MangaCard(
         modifier = modifier
             .clickable(onClick = { onClick(manga) }),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column{
             AsyncImage(

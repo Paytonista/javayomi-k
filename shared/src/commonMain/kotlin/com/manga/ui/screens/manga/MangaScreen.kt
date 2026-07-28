@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.manga.models.Chapter
 import com.manga.models.Manga
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.input.key.Key.Companion.R
 import coil3.compose.AsyncImage
@@ -31,7 +32,7 @@ fun MangaScreen(
     Column{
         Row{
             AsyncImage(
-                model = "https://tse1.mm.bing.net/th/id/OIP.XunYjLcoen96PXLIFZplTgHaKt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+                model = manga.mangaCover,
                 contentDescription = null,
                 modifier = Modifier.size(300.dp)
             )
@@ -43,8 +44,9 @@ fun MangaScreen(
                 Text(
                     text = chapter.chapterTitle,
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(4.dp)
                         .clickable { onChapterClick(chapter) }
+                        .fillMaxWidth()
                 )
             }
         }

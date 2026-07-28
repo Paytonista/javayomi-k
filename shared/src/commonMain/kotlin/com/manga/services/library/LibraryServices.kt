@@ -17,6 +17,7 @@ class LibraryServices {
         val mangaFolders = rootFolder.listFiles() { file -> file.isDirectory }
         if (mangaFolders != null) {
             for(mangaFolder in mangaFolders) {
+                println("Scanning Manga: $mangaFolder")
                 val mangaCover = setLocalMangaCover(mangaFolder)
                 val chapters = mutableListOf<Chapter>()
                 val chapterFolders = mangaFolder.listFiles { file -> file.isDirectory }
@@ -32,6 +33,7 @@ class LibraryServices {
                         val content: ChapterContent = when {
                             imageFiles.isNotEmpty() -> {
                                 isValidMangaPath = true
+                                println("Found Chapter: $imageFiles")
                                 ChapterContent.ImageFolder(imagePaths = imageFiles.map { file -> file.path })
 
                             }
@@ -62,8 +64,6 @@ class LibraryServices {
             }
         return mangaList
     }
-
-
     fun setLocalMangaCover(mangaFolder : File) : String? {
         val chapterFolders = mangaFolder.listFiles { file -> file.isDirectory }
         if (chapterFolders != null) {
