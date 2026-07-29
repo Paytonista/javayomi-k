@@ -39,6 +39,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import org.jetbrains.skia.Surface
 
@@ -79,6 +80,7 @@ private fun WindowScope.CustomTitleBar(
         Row (modifier = Modifier
             .fillMaxWidth()
             .height(30.dp)
+            .background(color = Color(0xFFE8E8E8))
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 drawLine(
@@ -90,10 +92,13 @@ private fun WindowScope.CustomTitleBar(
             verticalAlignment = Alignment.CenterVertically,
         ){
 
+            Spacer(Modifier.weight(1f))
+
             Text(text = "Javayomi",
-                letterSpacing = 2.sp,
+                letterSpacing = 1.sp,
                 fontSize = 12.sp,
-                fontFamily = FontFamily.Monospace,)
+                fontFamily = FontFamily.Monospace,
+                fontWeight = FontWeight.ExtraBold,)
 
             Spacer(Modifier.weight(1f))
             IconButton(onClick = onCloseRequest, shape = RectangleShape) {
