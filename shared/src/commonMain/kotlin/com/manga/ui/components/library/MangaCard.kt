@@ -16,6 +16,9 @@ import com.manga.models.Manga
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.layout.ContentScale
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.size.Size
 
 @Composable
 fun MangaCard(
@@ -32,9 +35,13 @@ fun MangaCard(
     ) {
         Column{
             AsyncImage(
-                model = manga.mangaCover,
+                model = ImageRequest.Builder(LocalPlatformContext.current)
+                    .data(manga.mangaCover)
+                    .size(Size.ORIGINAL) // don't downsample at all, always decode full-res
+                    .build(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
+
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(2f / 3f)

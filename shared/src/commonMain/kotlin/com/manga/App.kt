@@ -10,6 +10,8 @@ import com.manga.ui.screens.manga.MangaViewModel
 import com.manga.ui.screens.reader.ReaderViewModel
 import com.manga.navigation.AppNavigation
 import androidx.compose.material3.TextButton
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.manga.repositories.LibraryRepository
 import com.manga.services.filesystem.FolderServices
 import com.manga.services.library.LibraryServices
@@ -18,11 +20,9 @@ import io.github.vinceglb.filekit.FileKit
 
 @Preview
 @Composable
-fun App() {
+fun App(navController: NavHostController = rememberNavController()) {
 
     FileKit.init(appId = "MyApplication")
-
-    val navController = rememberNavController()
 
     val libraryRepository = remember { LibraryRepository(FolderServices(), LibraryServices()) }
 

@@ -27,13 +27,19 @@ import com.manga.models.Manga
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -41,56 +47,92 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import com.manga.models.Category
+
+import com.manga.ui.components.library.CategoryCard
 
 @Composable
 fun LibraryScreen(
     viewModel: LibraryViewModel,
     onMangaClick: (Manga) -> Unit
 ) {
+    var searchQuery by remember { mutableStateOf("") }
+
+    val allCategory = Category(id = "0", categoryName = "All", order = 1)
+
     Box {
-        Column {
-            Row(modifier = Modifier.fillMaxWidth()
-                .padding(4.dp)) {
-                TextButton(onClick = {
-                    viewModel.addToLibrary()
-                },
-                    shape = RectangleShape,
-                    border = BorderStroke(1.dp, Color.LightGray),
+        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+            var searchQuery by remember { mutableStateOf("") }
 
-                    ) {
-                    Text("Refresh")
+            Box(
+                modifier = Modifier
+                    .height(36.dp)
+                    .width(300.dp)
+                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
+                    .padding(horizontal = 10.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Default.Search,
+                        contentDescription = "Search",
+                        modifier = Modifier.size(16.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Box(modifier = Modifier.weight(1f)) {
+                        if (searchQuery.isEmpty()) {
+                            Text(
+                                "Search",
+                                fontSize = 13.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        BasicTextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            singleLine = true,
+                            textStyle = LocalTextStyle.current.copy(
+                                fontSize = 13.sp,
+                                color = MaterialTheme.colorScheme.onSurface
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
-                Spacer(modifier = Modifier.weight(.04f))
+            }
 
-                TextButton(onClick = {
-                    viewModel.addToLibrary()
-                },
-                    shape = RectangleShape,
-                    border = BorderStroke(1.dp, Color.LightGray),
-                    contentPadding = PaddingValues(horizontal = 2.dp, vertical = 2.dp),
+            FlowRow (modifier = Modifier
+                .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 10.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)) {
 
-                    ) {
-                    Text("Layout")
+                    CategoryCard(category = allCategory)
+
+                    Box(
+                            modifier = Modifier
+                                .height(28.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(8.dp))
+                                .clickable(onClick = { /* refresh action */ })
+                                .padding(horizontal = 8.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text="+ New", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+
                 }
-                Spacer(modifier = Modifier.weight(.04f))
-                TextButton(onClick = {
-                    viewModel.addToLibrary()
-                },
-                    shape = RectangleShape,
-                    border = BorderStroke(1.dp, Color.LightGray),
-
-                    ) {
-                    Text("Filters")
-                }
-
-                Spacer(modifier = Modifier
-                    .weight(1f, true)
-                )
-
-
-        }
-
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 140.dp),
                 contentPadding = PaddingValues(8.dp),
@@ -109,8 +151,6 @@ fun LibraryScreen(
 
 
         }
-
-
         FloatingActionButton(
             onClick = { viewModel.addToLibrary() },
             shape = CircleShape,

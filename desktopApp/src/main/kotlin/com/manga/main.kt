@@ -41,11 +41,15 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.manga.ui.components.navigation.Sidebar
 import org.jetbrains.skia.Surface
 
 
 fun main() = application {
-    val windowState = rememberWindowState(width = 800.dp, height = 400.dp)
+    val windowState = rememberWindowState(width = 1000.dp, height = 600.dp)
+    val navController = rememberNavController()
 
     Window(
         onCloseRequest = ::exitApplication,
@@ -53,17 +57,23 @@ fun main() = application {
         resizable = false,
         undecorated = true,
         transparent = true,
-        state = WindowState()
+        state = windowState,
+
     ) {
 
         Surface (modifier = Modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(12.dp)),
             color = MaterialTheme.colorScheme.background) {
-            Column(Modifier.fillMaxSize()){
-                CustomTitleBar( windowState = windowState, onCloseRequest = ::exitApplication)
-                App()
+            Row {
+
+                Sidebar(navController)
+                Column(Modifier.fillMaxSize()){
+                    CustomTitleBar( windowState = windowState, onCloseRequest = ::exitApplication)
+                    App(navController)
+                }
             }
+
         }
 
 
@@ -79,8 +89,8 @@ private fun WindowScope.CustomTitleBar(
     WindowDraggableArea {
         Row (modifier = Modifier
             .fillMaxWidth()
-            .height(30.dp)
-            .background(color = Color(0xFFE8E8E8))
+            .height(40.dp)
+            .background(color = Color(0xFFEDEDED))
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 drawLine(
@@ -106,10 +116,7 @@ private fun WindowScope.CustomTitleBar(
                     contentDescription = "Close",
                     modifier = Modifier.size(20.dp))
             }
-
         }
-
     }
-
 }
 

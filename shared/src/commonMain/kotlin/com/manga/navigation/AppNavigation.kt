@@ -25,7 +25,6 @@ fun AppNavigation(
     readerView: ReaderViewModel,
 ) {
 
-    Sidebar(navController)
     NavHost(navController = navController, startDestination = Screens.Library) {
         composable<Screens.Library> {
             LibraryScreen(
@@ -48,7 +47,6 @@ fun AppNavigation(
                 }
             )
         }
-
         composable<Screens.Reader> { backStackEntry ->
             val route: Screens.Reader = backStackEntry.toRoute()
             val manga = libraryView.mangaList.find {it.mangaName == route.mangaName}
